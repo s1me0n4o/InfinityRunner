@@ -9,8 +9,7 @@ public class Platform : MonoBehaviour
 
     private void OnEnable()
     {
-        environmentManager = EnvironmentManager.Instance();
-        print("TEST");
+        environmentManager = EnvironmentManager.instance;
     }
 
     private IEnumerator OnTriggerExit(Collider other)

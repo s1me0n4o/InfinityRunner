@@ -45,20 +45,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 velocityY = jumpHeight;
             }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                velocityLeft = moveToLeft;
-                velocity.x = velocityLeft;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                velocityRight = moveToRight;
-                velocity.x = velocityRight;
-                print(velocity.x);
-            }
         }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            velocityLeft = moveToLeft;
+            velocity.x = velocityLeft;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            velocityRight = moveToRight;
+            velocity.x = velocityRight;
+        }
+
         velocityY -= gravity;
 
         velocity.y = velocityY;

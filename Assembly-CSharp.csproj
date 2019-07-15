@@ -65,7 +65,9 @@
     <Compile Include="Assets\Scripts\EnvironmentManager.cs" />
     <Compile Include="Assets\Scripts\Platform.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <None Include="Assets\Japanese Coin\Environment\HDR_Readme.txt" />
     <None Include="Assets\Skyboxes\_skybox info.txt" />
+    <None Include="Assets\Japanese Coin\hello there.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Unity/InfinityRunner/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

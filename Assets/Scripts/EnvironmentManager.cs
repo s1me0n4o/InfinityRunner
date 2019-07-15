@@ -7,27 +7,42 @@ public class EnvironmentManager : MonoBehaviour
 
     private float positionZOffset = 10f;
     private float positionYOffset;
+    private float coinZPosition = 6f;
+    private float coinOffset = 5f;
 
-
+    [SerializeField]
+    private GameObject coinPrefab;
     [SerializeField]
     private GameObject[] environmentPrefabs;
 
+    private float[] cointRailsPositions = { -1.85f, 0, 1.75f };
+ /*
     #region Singleton
     public static EnvironmentManager Instance()
-    {   
+    {
         {
             if (instance == null)
             {
                 GameObject go = new GameObject("EnvironmentManager");
                 go.AddComponent<EnvironmentManager>();
+                return go.GetComponent<EnvironmentManager>();
             }
-            return instance;
+            else
+            {
+                return instance;
+            }
         }
     }
     #endregion
+ */
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Debug.Log("More than 1 EnvironmentManager in the scene!");
+            return;
+        }
         instance = this;
     }
 
@@ -35,7 +50,6 @@ public class EnvironmentManager : MonoBehaviour
     {
         Vector3 position = new Vector3(0, 0, 0);
 
-        Instantiate(environmentPrefabs[2], position, Quaternion.identity);
         position.z += 10;
 
         for (int i = 1; i < 20; i++)
@@ -44,13 +58,24 @@ public class EnvironmentManager : MonoBehaviour
             Instantiate(environmentPrefabs[randPrefab], position, Quaternion.identity);
             position.z += 10;
 
-            if (environmentPrefabs[randPrefab].tag == "Stairs")
-            {
-                position.y += 4.75f;
-                positionYOffset = position.y;
-                position.z += 0.1f; 
-            }
             positionZOffset = position.z;
+
+            CoinGenerator(position, environmentPrefabs[randPrefab].tag);
+        }
+    }
+
+    private void CoinGenerator(Vector3 position,string tag)
+    {
+        for (int j = 0; j <= 5; j++)
+        {
+            float coinYPosition = position.y + 1f;
+            int randomIndex = Random.Range(0, 3);
+            float randXCoinPos = cointRailsPositions[randomIndex];
+
+            Vector3 coinPos = new Vector3(randXCoinPos, coinYPosition, coinZPosition);
+            Instantiate(coinPrefab, coinPos, Quaternion.identity);
+
+            coinZPosition += coinOffset;
         }
     }
 
@@ -59,9 +84,5 @@ public class EnvironmentManager : MonoBehaviour
         //reposition to next z offset
         platfrom.transform.position = new Vector3(0, positionYOffset, positionZOffset);
         positionZOffset += 10;
-        if (platfrom.tag == "Stairs")
-        {
-            positionYOffset += 4.75f;
-        }
     }
 }
